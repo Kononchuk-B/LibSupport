@@ -27,11 +27,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class JPAConfig {
 
     @Autowired
-    Environment environment;
+    private Environment environment;
 
     @Bean
     public DataSource dataSource() {
-        final DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
+        DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
         driverManagerDataSource.setDriverClassName(environment.getProperty("jdbc.driverClassName"));
         driverManagerDataSource.setUrl(environment.getProperty("jdbc.url"));
         driverManagerDataSource.setUsername(environment.getProperty("jdbc.user"));
@@ -41,27 +41,27 @@ public class JPAConfig {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        final LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+        LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         localContainerEntityManagerFactoryBean.setPersistenceUnitName("localContainerEntityManagerFactoryBean");
+
         localContainerEntityManagerFactoryBean.setDataSource(dataSource());
         localContainerEntityManagerFactoryBean.setPackagesToScan(environment.getProperty("entities.scan"));
-        final JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+
+        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         localContainerEntityManagerFactoryBean.setJpaVendorAdapter(vendorAdapter);
         localContainerEntityManagerFactoryBean.setJpaPropertyMap(hibernateProperties());
+
         return localContainerEntityManagerFactoryBean;
     }
 
 
     @Bean
-    public PlatformTransactionManager transactionManager(
-            final EntityManagerFactory entityManagerFactory) {
-        final JpaTransactionManager transactionManager = new JpaTransactionManager(
-                entityManagerFactory);
-        return transactionManager;
+    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+        return new JpaTransactionManager(entityManagerFactory);
     }
 
 
-    public Map<String, String> hibernateProperties() {
+    private Map<String, String> hibernateProperties() {
         Map<String, String> hibernateProperties = new HashMap<>();
         hibernateProperties.put("hibernate.hbm2ddl.auto", environment.getProperty("hb.hbm2ddl.auto"));
         hibernateProperties.put("hibernate.dialect", environment.getProperty("hb.dialect"));

@@ -1,0 +1,10 @@
+com\libsupport\entity\Feedback.class
+com\libsupport\entity\BookCopy.class
+com\libsupport\entity\User.class
+com\libsupport\config\JPAConfig.class
+com\libsupport\config\WebConfig.class
+com\libsupport\entity\UserRole.class
+com\libsupport\entity\BookReservation.class
+com\libsupport\entity\converter\LocalDateAttributeConverter.class
+com\libsupport\config\WebAppInitializer.class
+com\libsupport\entity\Book.class

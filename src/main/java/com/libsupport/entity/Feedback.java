@@ -1,27 +1,39 @@
 package com.libsupport.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "FEEDBACK")
-@Getter
-@Setter
 public class Feedback {
+
+    @Id
+    @GeneratedValue
+    private int id;
 
     private int stars;
 
     private String description;
 
+    @Column(name = "date_of_publish")
     private LocalDate dateOfPublish;
 
     @ManyToOne
-    private Reader reader;
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
+
+    public Feedback(int stars) {
+        this.stars = stars;
+    }
 
 }

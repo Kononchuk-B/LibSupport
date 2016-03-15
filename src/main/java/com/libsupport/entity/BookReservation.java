@@ -1,26 +1,27 @@
 package com.libsupport.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "BOOK_RESERVATION")
-@Getter
-@Setter
 public class BookReservation {
 
+    @Id
+    @GeneratedValue
+    private int id;
+
+    @Column
+    private LocalDate startRead;
+
+    @Column
+    private LocalDate finishRead;
+
     @ManyToOne
+    @JoinColumn(name = "book_id")
     private Book book;
 
     @ManyToOne
-    private Reader reader;
-
-    private LocalDate from;
-
-    private LocalDate to;
+    @JoinColumn(name = "user_id")
+    private User user;
 }
