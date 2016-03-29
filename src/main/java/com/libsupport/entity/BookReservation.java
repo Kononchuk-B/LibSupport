@@ -1,6 +1,7 @@
 package com.libsupport.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Future;
 import java.time.LocalDate;
 
 @Entity
@@ -15,6 +16,7 @@ public class BookReservation {
     private LocalDate startRead;
 
     @Column
+    @Future
     private LocalDate finishRead;
 
     @ManyToOne

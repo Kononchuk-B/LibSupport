@@ -1,9 +1,7 @@
 package com.libsupport.entity;
 
 import javax.persistence.*;
-
-import lombok.*;
-
+import javax.validation.constraints.Past;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -28,6 +26,7 @@ public class User {
     private String address;
 
     @Column(name = "date_of_birth")
+    @Past
     private LocalDate dateOfBirth;
 
     private String gender;

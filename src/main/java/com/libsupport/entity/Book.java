@@ -1,6 +1,5 @@
 package com.libsupport.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,12 +9,16 @@ import java.util.List;
 
 @Entity
 @Table(name = "BOOK")
+@Getter
+@Setter
+@NoArgsConstructor
 public class Book {
 
     @Id
     @GeneratedValue
     private int id;
 
+    @Column(nullable = false)
     private String name;
 
     private String author;
@@ -42,7 +45,34 @@ public class Book {
     @OneToMany(mappedBy="book", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
     private List<Feedback> feedbacks;
 
+    public Book(String name, String author, String authors, String numberOfPages, String edition, String yearOfPublish, int numberOfCopies) {
+        this.name = name;
+        this.author = author;
+        this.authors = authors;
+        this.numberOfPages = numberOfPages;
+        this.edition = edition;
+        this.yearOfPublish = yearOfPublish;
+        this.numberOfCopies = numberOfCopies;
+    }
 
+    public Book(String name, String author, String authors, String edition, String numberOfPages, String yearOfPublish, int numberOfCopies, List<BookReservation> reserveBooks, List<BookCopy> copiesBooks, List<Feedback> feedbacks) {
+        this.name = name;
+        this.author = author;
+        this.authors = authors;
+        this.edition = edition;
+        this.numberOfPages = numberOfPages;
+        this.yearOfPublish = yearOfPublish;
+        this.numberOfCopies = numberOfCopies;
+        this.reserveBooks = reserveBooks;
+        this.copiesBooks = copiesBooks;
+        this.feedbacks = feedbacks;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 }

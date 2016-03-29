@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
   <artifact type="war" name="LibSupport:war">
     <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="LibSupport-1.0-SNAPSHOT.war">
+    <root id="archive" name="libsupport-1.0-SNAPSHOT.war">
       <element id="artifact" artifact-name="LibSupport:war exploded" />
     </root>
   </artifact>
